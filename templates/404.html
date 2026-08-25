@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}页面未找到 · {{ site.company_name|default:"艾研信息" }}{% endblock %}
+{% block body_class %}page-404{% endblock %}
+
+{% block content %}
+<section class="nf">
+    <p class="nf__code" data-reveal>404</p>
+    <h1 class="nf__title" data-reveal>这条路径，我们还没铺好。</h1>
+    <p class="nf__text" data-reveal>页面可能已迁移，或地址有误。</p>
+    <a href="{% url 'home' %}" class="btn btn--solid" data-reveal>返回首页</a>
+</section>
+{% endblock %}

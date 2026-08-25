@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}联系我们 · {{ site.company_name|default:"艾研信息" }}{% endblock %}
+{% block body_class %}page-contact{% endblock %}
+
+{% block content %}
+<header class="page-head">
+    <div class="page-head__inner">
+        <p class="page-head__eyebrow" data-reveal>Contact</p>
+        <h1 class="page-head__title" data-reveal>与我们联系</h1>
+        <p class="page-head__sub" data-reveal>无论是课程定制、竞赛方案还是合作咨询，欢迎随时沟通。</p>
+    </div>
+</header>
+
+<section class="section section--flat">
+    <div class="contact-grid">
+        <div class="contact-block" data-reveal style="--i:1">
+            <p class="contact-block__label">公司</p>
+            <p class="contact-block__value">{{ site.company_name }}{% if site.company_name_en %} · {{ site.company_name_en }}{% endif %}</p>
+            <p class="contact-block__value contact-block__value--soft">{{ site.tagline }}</p>
+        </div>
+
+        {% if site.contact_address %}
+        <div class="contact-block" data-reveal style="--i:2">
+            <p class="contact-block__label">地址</p>
+            <p class="contact-block__value">{{ site.contact_address }}</p>
+        </div>
+        {% endif %}
+
+        {% if site.contact_phone %}
+        <div class="contact-block" data-reveal style="--i:3">
+            <p class="contact-block__label">电话</p>
+            <p class="contact-block__value">{{ site.contact_phone }}</p>
+        </div>
+        {% endif %}
+
+        {% if site.contact_email %}
+        <div class="contact-block" data-reveal style="--i:4">
+            <p class="contact-block__label">邮箱</p>
+            <p class="contact-block__value">
+                <a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a>
+            </p>
+        </div>
+        {% endif %}
+
+        {% if site.contact_wechat %}
+        <div class="contact-block" data-reveal style="--i:5">
+            <p class="contact-block__label">微信</p>
+            <p class="contact-block__value">{{ site.contact_wechat }}</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

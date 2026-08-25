@@ -1,0 +1,42 @@
+<footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__brand">
+            <div class="footer__mark">
+                <svg width="24" height="24" viewBox="0 0 22 22" fill="none">
+                    <path d="M3 18 L8 4 L11 11 L14 6 L19 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div>
+                <div class="footer__name">{{ site.company_name|default:"艾研信息" }}</div>
+                <div class="footer__tag">{{ site.tagline }}</div>
+            </div>
+        </div>
+
+        <div class="footer__cols">
+            <div class="footer__col">
+                <h4 class="footer__head">产品</h4>
+                <a href="{% url 'product_list' %}" class="footer__link">全部产品</a>
+                {% for cat in site_categories|default_if_none:'' %}
+                    <a href="{% url 'product_list' %}?cat={{ cat.slug }}" class="footer__link">{{ cat.name }}</a>
+                {% endfor %}
+            </div>
+            <div class="footer__col">
+                <h4 class="footer__head">公司</h4>
+                <a href="{% url 'about' %}" class="footer__link">关于我们</a>
+                <a href="{% url 'news_list' %}" class="footer__link">新闻资讯</a>
+                <a href="{% url 'contact' %}" class="footer__link">联系我们</a>
+            </div>
+            <div class="footer__col">
+                <h4 class="footer__head">联系</h4>
+                {% if site.contact_phone %}<span class="footer__meta">{{ site.contact_phone }}</span>{% endif %}
+                {% if site.contact_email %}<a href="mailto:{{ site.contact_email }}" class="footer__link">{{ site.contact_email }}</a>{% endif %}
+                {% if site.contact_address %}<span class="footer__meta">{{ site.contact_address }}</span>{% endif %}
+                {% if site.contact_wechat %}<span class="footer__meta">微信 · {{ site.contact_wechat }}</span>{% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="footer__base">
+        <span>© {% now "Y" %} {{ site.company_name|default:"艾研信息" }}</span>
+        {% if site.contact_icp %}<span>{{ site.contact_icp }}</span>{% endif %}
+    </div>
+</footer>

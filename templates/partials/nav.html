@@ -1,0 +1,36 @@
+{% load static %}
+<header class="nav" id="nav" data-nav>
+    <div class="nav__inner">
+        <a href="{% url 'home' %}" class="nav__brand" aria-label="{{ site.company_name }}">
+            {% if site.logo %}
+                <img src="{{ site.logo.url }}" alt="{{ site.company_name }}" class="nav__logo">
+            {% else %}
+                <span class="nav__mark" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                        <path d="M3 18 L8 4 L11 11 L14 6 L19 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            {% endif %}
+            <span class="nav__name">{{ site.company_name|default:"艾研信息" }}</span>
+        </a>
+
+        <nav class="nav__links" aria-label="主导航">
+            <a href="{% url 'home' %}" class="nav__link">首页</a>
+            <a href="{% url 'product_list' %}" class="nav__link">产品</a>
+            <a href="{% url 'news_list' %}" class="nav__link">新闻</a>
+            <a href="{% url 'about' %}" class="nav__link">关于</a>
+            <a href="{% url 'contact' %}" class="nav__link">联系</a>
+        </nav>
+
+        <button class="nav__toggle" data-nav-toggle aria-label="菜单" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <div class="nav__drawer" data-nav-drawer>
+        <a href="{% url 'home' %}" class="nav__drawer-link">首页</a>
+        <a href="{% url 'product_list' %}" class="nav__drawer-link">产品</a>
+        <a href="{% url 'news_list' %}" class="nav__drawer-link">新闻</a>
+        <a href="{% url 'about' %}" class="nav__drawer-link">关于</a>
+        <a href="{% url 'contact' %}" class="nav__drawer-link">联系</a>
+    </div>
+</header>

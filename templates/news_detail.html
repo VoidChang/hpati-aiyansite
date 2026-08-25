@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }} · {{ site.company_name|default:"艾研信息" }}{% endblock %}
+{% block meta %}<meta name="description" content="{{ article.excerpt }}">{% endblock %}
+{% block body_class %}page-article{% endblock %}
+
+{% block content %}
+<nav class="crumbs" aria-label="路径">
+    <a href="{% url 'home' %}" class="crumbs__link">首页</a>
+    <span class="crumbs__sep">/</span>
+    <a href="{% url 'news_list' %}" class="crumbs__link">新闻</a>
+    <span class="crumbs__sep">/</span>
+    <span class="crumbs__current">{{ article.category|default:"动态" }}</span>
+</nav>
+
+<article class="article">
+    <header class="article__head">
+        <p class="article__meta">
+            <span>{{ article.category|default:"动态" }}</span>
+            <span class="article__dot">·</span>
+            <time>{{ article.published_at|date:"Y年m月d日" }}</time>
+        </p>
+        <h1 class="article__title" data-reveal>{{ article.title }}</h1>
+        {% if article.excerpt %}<p class="article__excerpt" data-reveal>{{ article.excerpt }}</p>{% endif %}
+    </header>
+
+    {% if article.cover %}
+    <figure class="article__cover">
+        <img src="{{ article.cover.url }}" alt="{{ article.title }}" data-reveal>
+    </figure>
+    {% endif %}
+
+    <div class="article__body prose" data-reveal>
+        {{ article.body|safe }}
+    </div>
+</article>
+
+{% if related %}
+<section class="section section--tint section--flat">
+    <h2 class="section__title section__title--small">继续阅读</h2>
+    <div class="news-list">
+        {% for article in related %}
+            <a href="{{ article.get_absolute_url }}" class="news-item">
+                <time class="news-item__date">{{ article.published_at|date:"Y-m-d" }}</time>
+                <span class="news-item__cat">{{ article.category|default:"动态" }}</span>
+                <h3 class="news-item__title">{{ article.title }}</h3>
+            </a>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+{% endblock %}

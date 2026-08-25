@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}产品 · {{ site.company_name|default:"艾研信息" }}{% endblock %}
+
+{% block body_class %}page-products{% endblock %}
+
+{% block content %}
+<header class="page-head">
+    <div class="page-head__inner">
+        <p class="page-head__eyebrow" data-reveal>Products</p>
+        <h1 class="page-head__title" data-reveal>教学实验套件</h1>
+        <p class="page-head__sub" data-reveal>从单片机、物联网到模拟电源与智能小车——模块化设计，全栈覆盖。</p>
+    </div>
+</header>
+
+{% if categories %}
+<div class="filter">
+    <a href="{% url 'product_list' %}" class="filter__chip{% if not active_cat %} is-active{% endif %}">全部</a>
+    {% for cat in categories %}
+        <a href="{% url 'product_list' %}?cat={{ cat.slug }}" class="filter__chip{% if active_cat == cat.slug %} is-active{% endif %}">{{ cat.name }}</a>
+    {% endfor %}
+</div>
+{% endif %}
+
+<section class="section section--flat">
+    <div class="grid grid--cards">
+        {% for product in object_list %}
+            <a href="{{ product.get_absolute_url }}" class="card" data-reveal style="--i:{{ forloop.counter|add:'1' }}">
+                <div class="card__media">
+                    {% if product.cover %}
+                        <img src="{{ product.cover.url }}" alt="{{ product.name }}" loading="lazy">
+                    {% else %}
+                        <span class="card__placeholder">{{ product.name|slice:":2" }}</span>
+                    {% endif %}
+                </div>
+                <div class="card__body">
+                    <span class="card__code">{{ product.code }}</span>
+                    <h3 class="card__title">{{ product.name }}</h3>
+                    <p class="card__text">{{ product.summary|default:product.tagline|default:"" }}</p>
+                    <span class="card__more">了解更多 →</span>
+                </div>
+            </a>
+        {% empty %}
+            <p class="empty" data-reveal>暂无产品，请在后台发布。</p>
+        {% endfor %}
+    </div>
+
+    {% include 'partials/pagination.html' %}
+</section>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ site.company_name|default:"艾研信息" }} · {{ site.tagline }}{% endblock %}
+
+{% block body_class %}page-home{% endblock %}
+
+{% block content %}
+{# ───────────────────────── Hero — oversized serif, staggered line reveal ──── #}
+<section class="hero">
+    <div class="hero__inner">
+        <p class="hero__eyebrow" data-reveal>高校电子工程 · 教学实验平台</p>
+        <h1 class="hero__title">
+            <span class="hero__line" data-reveal style="--i:1">{{ site.hero_title|default:"让工程教育" }}</span>
+            <span class="hero__line hero__line--accent" data-reveal style="--i:2">回归动手实践。</span>
+        </h1>
+        <p class="hero__sub" data-reveal style="--i:3">
+            {{ site.hero_subtitle }}
+        </p>
+        <div class="hero__actions" data-reveal style="--i:4">
+            <a href="{% url 'product_list' %}" class="btn btn--solid">浏览产品</a>
+            <a href="{% url 'about' %}" class="btn btn--ghost">了解艾研</a>
+        </div>
+    </div>
+    <div class="hero__grain" aria-hidden="true"></div>
+</section>
+
+{# ───────────────────────── Categories strip ─────────────────────────────── #}
+{% if categories %}
+<section class="strip">
+    <div class="strip__inner">
+        {% for cat in categories %}
+            <a href="{% url 'product_list' %}?cat={{ cat.slug }}" class="chip">{{ cat.name }}</a>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{# ───────────────────────── Featured products ────────────────────────────── #}
+{% if featured_products %}
+<section class="section">
+    <div class="section__head">
+        <p class="section__eyebrow">Featured</p>
+        <h2 class="section__title">为教学而生的套件</h2>
+    </div>
+    <div class="grid grid--cards">
+        {% for product in featured_products %}
+            <a href="{{ product.get_absolute_url }}" class="card" data-reveal style="--i:{{ forloop.counter }}">
+                <div class="card__media">
+                    {% if product.cover %}
+                        <img src="{{ product.cover.url }}" alt="{{ product.name }}" loading="lazy">
+                    {% else %}
+                        <span class="card__placeholder">{{ product.name|slice:":2" }}</span>
+                    {% endif %}
+                </div>
+                <div class="card__body">
+                    <span class="card__code">{{ product.code }}</span>
+                    <h3 class="card__title">{{ product.name }}</h3>
+                    <p class="card__text">{{ product.summary|default:product.tagline|default:"" }}</p>
+                    <span class="card__more">了解更多 →</span>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+    <div class="section__foot">
+        <a href="{% url 'product_list' %}" class="link-arrow">查看全部产品</a>
+    </div>
+</section>
+{% endif %}
+
+{# ───────────────────────── Latest news ─────────────────────────────────── #}
+{% if latest_news %}
+<section class="section section--tint">
+    <div class="section__head">
+        <p class="section__eyebrow">Newsroom</p>
+        <h2 class="section__title">资讯与动态</h2>
+    </div>
+    <div class="news-list">
+        {% for article in latest_news %}
+            <a href="{{ article.get_absolute_url }}" class="news-item" data-reveal style="--i:{{ forloop.counter }}">
+                <time class="news-item__date">{{ article.published_at|date:"Y-m-d" }}</time>
+                <span class="news-item__cat">{{ article.category|default:"动态" }}</span>
+                <h3 class="news-item__title">{{ article.title }}</h3>
+            </a>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{# ───────────────────────── Closing statement ────────────────────────────── #}
+<section class="cta">
+    <div class="cta__inner">
+        <h2 class="cta__title" data-reveal>从课程到竞赛，<br>一套套件贯穿始终。</h2>
+        <p class="cta__text" data-reveal>配套例程、应用视频与标准化接口，让创新想法快速落地。</p>
+        <a href="{% url 'contact' %}" class="btn btn--solid" data-reveal>与我们联系</a>
+    </div>
+</section>
+{% endblock %}

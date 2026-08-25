@@ -1,0 +1,37 @@
+# Render Blueprint for the AiYan website.
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: aiyan-website
+    runtime: python
+    plan: free
+    # Render checks out the repo then runs this build script.
+    buildCommand: './render-build.sh'
+    # Gunicorn serves the WSGI app. WhiteNoise handles static files.
+    startCommand: 'gunicorn aiyansite.wsgi:application --bind 0.0.0.0:$PORT --workers 2'
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: 'False'
+      - key: ALLOWED_HOSTS
+        value: '*.onrender.com'
+      - key: WEB_CONCURRENCY
+        value: '2'
+      # A managed Postgres database, created automatically by Render.
+      - key: DATABASE_URL
+        fromDatabase:
+          name: aiyan-db
+          property: connectionString
+      - key: CSRF_TRUSTED_ORIGINS
+        value: 'https://*.onrender.com'
+      # Set this in the Render dashboard to seed the default admin user.
+      - key: ADMIN_INITIAL_PASSWORD
+        sync: false
+
+databases:
+  - name: aiyan-db
+    plan: free
+    databaseName: aiyan

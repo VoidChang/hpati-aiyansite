@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static website_extras %}
+
+{% block title %}{{ product.name }} · {{ site.company_name|default:"艾研信息" }}{% endblock %}
+{% block meta %}<meta name="description" content="{{ product.summary|default:product.tagline }}">{% endblock %}
+
+{% block body_class %}page-product{% endblock %}
+
+{% block content %}
+<nav class="crumbs" aria-label="路径">
+    <a href="{% url 'home' %}" class="crumbs__link">首页</a>
+    <span class="crumbs__sep">/</span>
+    <a href="{% url 'product_list' %}" class="crumbs__link">产品</a>
+    <span class="crumbs__sep">/</span>
+    <span class="crumbs__current">{{ product.name }}</span>
+</nav>
+
+<article class="pdp">
+    <header class="pdp__head">
+        <p class="pdp__code" data-reveal>{{ product.code }}</p>
+        <h1 class="pdp__title" data-reveal>{{ product.name }}</h1>
+        <p class="pdp__tag" data-reveal>{{ product.tagline }}</p>
+    </header>
+
+    <div class="pdp__gallery">
+        {% if product.cover %}
+            <figure class="pdp__main-shot">
+                <img src="{{ product.cover.url }}" alt="{{ product.name }}" data-reveal>
+            </figure>
+        {% endif %}
+        {% for img in product.images.all %}
+            <figure class="pdp__shot">
+                <img src="{{ img.image.url }}" alt="{{ img.caption|default:product.name }}" loading="lazy">
+            </figure>
+        {% endfor %}
+    </div>
+
+    <div class="pdp__body">
+        <section class="prose">
+            {% if product.summary %}
+                <p class="pdp__lead" data-reveal>{{ product.summary }}</p>
+            {% endif %}
+            {% if product.description %}
+                <div data-reveal>{{ product.description|safe }}</div>
+            {% endif %}
+        </section>
+
+        {% if product.specifications %}
+        <section class="pdp__block">
+            <h2 class="pdp__block-title">规格参数</h2>
+            <dl class="specs">
+                {% for key, val in product.specifications|spec_rows %}
+                    <div class="specs__row">
+                        <dt>{{ key }}</dt>
+                        <dd>{{ val }}</dd>
+                    </div>
+                {% endfor %}
+            </dl>
+        </section>
+        {% endif %}
+
+        {% if experiments %}
+        <section class="pdp__block">
+            <h2 class="pdp__block-title">实验列表</h2>
+            <ol class="exp-list">
+                {% for exp in experiments %}
+                    <li>{{ exp.title }}</li>
+                {% endfor %}
+            </ol>
+        </section>
+        {% endif %}
+
+        {% if documents %}
+        <section class="pdp__block">
+            <h2 class="pdp__block-title">配套资料</h2>
+            <ul class="docs">
+                {% for doc in documents %}
+                    <li>
+                        <a href="{{ doc.file.url }}" class="docs__link" target="_blank" rel="noopener">
+                            <span class="docs__ext">{{ doc.file.name|file_ext }}</span>
+                            <span class="docs__title">{{ doc.title }}</span>
+                            <span class="docs__meta">{{ doc.file_size_label }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+    </div>
+</article>
+
+{% if related %}
+<section class="section section--tint section--flat">
+    <h2 class="section__title section__title--small">相关产品</h2>
+    <div class="grid grid--cards">
+        {% for product in related %}
+            <a href="{{ product.get_absolute_url }}" class="card" data-reveal style="--i:{{ forloop.counter }}">
+                <div class="card__media">
+                    {% if product.cover %}
+                        <img src="{{ product.cover.url }}" alt="{{ product.name }}" loading="lazy">
+                    {% else %}
+                        <span class="card__placeholder">{{ product.name|slice:":2" }}</span>
+                    {% endif %}
+                </div>
+                <div class="card__body">
+                    <span class="card__code">{{ product.code }}</span>
+                    <h3 class="card__title">{{ product.name }}</h3>
+                    <span class="card__more">了解更多 →</span>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+{% endblock %}

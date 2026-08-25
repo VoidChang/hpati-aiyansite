@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}关于我们 · {{ site.company_name|default:"艾研信息" }}{% endblock %}
+{% block body_class %}page-about{% endblock %}
+
+{% block content %}
+<header class="page-head page-head--center">
+    <div class="page-head__inner">
+        <p class="page-head__eyebrow" data-reveal>About</p>
+        <h1 class="page-head__title" data-reveal>{{ site.about_title|default:"让工程教育，回归动手实践" }}</h1>
+    </div>
+</header>
+
+<section class="section section--flat">
+    <div class="prose prose--wide" data-reveal>
+        {% if site.about_body %}
+            {{ site.about_body|safe }}
+        {% else %}
+            <p>{{ site.company_name }} 专注于高校电子工程教育的教学实验平台研发。我们以模块化、可扩展为设计原则，覆盖单片机、物联网、模拟电源、信号链与智能小车等方向，配套完整的代码例程与应用视频。</p>
+            <p>从课程教学到学科竞赛，一套套件贯穿始终。</p>
+        {% endif %}
+    </div>
+</section>
+
+<section class="stats">
+    <div class="stats__inner">
+        <div class="stats__item" data-reveal style="--i:1">
+            <span class="stats__num">6+</span>
+            <span class="stats__label">产品线</span>
+        </div>
+        <div class="stats__item" data-reveal style="--i:2">
+            <span class="stats__num">10+</span>
+            <span class="stats__label">年教学积累</span>
+        </div>
+        <div class="stats__item" data-reveal style="--i:3">
+            <span class="stats__num">TI</span>
+            <span class="stats__label">生态合作伙伴</span>
+        </div>
+        <div class="stats__item" data-reveal style="--i:4">
+            <span class="stats__num">产学</span>
+            <span class="stats__label">协同育人项目</span>
+        </div>
+    </div>
+</section>
+{% endblock %}

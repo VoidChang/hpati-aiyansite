@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}新闻资讯 · {{ site.company_name|default:"艾研信息" }}{% endblock %}
+{% block body_class %}page-news{% endblock %}
+
+{% block content %}
+<header class="page-head">
+    <div class="page-head__inner">
+        <p class="page-head__eyebrow" data-reveal>Newsroom</p>
+        <h1 class="page-head__title" data-reveal>新闻资讯</h1>
+    </div>
+</header>
+
+{% if categories %}
+<div class="filter">
+    <a href="{% url 'news_list' %}" class="filter__chip{% if not active_cat %} is-active{% endif %}">全部</a>
+    {% for cat in categories %}
+        <a href="{% url 'news_list' %}?cat={{ cat.slug }}" class="filter__chip{% if active_cat == cat.slug %} is-active{% endif %}">{{ cat.name }}</a>
+    {% endfor %}
+</div>
+{% endif %}
+
+<section class="section section--flat">
+    <ul class="article-list">
+        {% for article in object_list %}
+            <li class="article-list__item" data-reveal style="--i:{{ forloop.counter }}">
+                <time class="article-list__date">{{ article.published_at|date:"Y-m-d" }}</time>
+                <div class="article-list__main">
+                    <span class="article-list__cat">{{ article.category|default:"动态" }}</span>
+                    <a href="{{ article.get_absolute_url }}">
+                        <h2 class="article-list__title">{{ article.title }}</h2>
+                    </a>
+                    {% if article.excerpt %}<p class="article-list__excerpt">{{ article.excerpt }}</p>{% endif %}
+                </div>
+            </li>
+        {% empty %}
+            <li class="empty" data-reveal>暂无文章。</li>
+        {% endfor %}
+    </ul>
+
+    {% include 'partials/pagination.html' %}
+</section>
+{% endblock %}
