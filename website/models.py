@@ -306,3 +306,59 @@ class SiteSetting(models.Model):
         """Return the single canonical row, creating it lazily if needed."""
         obj, _ = cls.objects.get_or_create(pk=1)
         return obj
+
+
+# --------------------------------------------------------------------------- #
+# Resource center — downloadable docs, code, tools scraped from hpati.com.
+# Files stay on the original site; we link out via external_url.
+# --------------------------------------------------------------------------- #
+class Resource(models.Model):
+    """A downloadable resource (doc / source / tool / video) from hpati.com.
+
+    The binary files themselves remain hosted on the original site — we only
+    store metadata and link out. This avoids mirroring potentially large
+    binaries while still presenting a unified resource catalogue.
+    """
+
+    CATEGORY_CHOICES = [
+        ('doc', '文档类'),
+        ('source', '代码类'),
+        ('tool', '工具软件'),
+        ('video', '视频资源'),
+    ]
+
+    title = models.CharField('标题', max_length=200)
+    category = models.CharField('分类', max_length=20,
+                                choices=CATEGORY_CHOICES, default='doc')
+    description = models.TextField('描述', blank=True,
+                                   help_text='可选，资源简述。')
+    download_password = models.CharField('下载密码', max_length=40, blank=True,
+                                         help_text='原站下载密码提示，如 xxad。')
+    file_size_hint = models.CharField('文件大小', max_length=40, blank=True,
+                                       help_text='可选，例如「2 MB」。')
+    external_url = models.URLField('原站链接', max_length=300,
+                                   help_text='原 hpati.com 下载页 URL。')
+    product = models.ForeignKey(
+        Product, on_delete=models.SET_NULL, null=True, blank=True,
+        related_name='resources', verbose_name='关联产品',
+    )
+    published_at = models.DateField('发布日期', null=True, blank=True)
+    order = models.PositiveIntegerField('排序', default=0)
+    is_published = models.BooleanField('发布', default=True)
+    created_at = models.DateTimeField('创建时间', auto_now_add=True)
+    updated_at = models.DateTimeField('更新时间', auto_now=True)
+
+    class Meta:
+        verbose_name = '资源'
+        verbose_name_plural = '资源'
+        ordering = ['category', 'order', '-created_at']
+
+    def __str__(self) -> str:
+        return self.title
+
+    @property
+    def file_ext(self) -> str:
+        """Return the extension inferred from the title (e.g. '.pdf')."""
+        import os
+        name, ext = os.path.splitext(self.title)
+        return ext.lower().lstrip('.')

@@ -51,6 +51,8 @@ PRODUCT_CATEGORIES = [
     {'name': '模拟与电源', 'slug': 'analog-power', 'summary': '模拟电源与信号链实验', 'order': 4},
     {'name': '单片机', 'slug': 'mcu', 'summary': '单片机教学实验平台', 'order': 5},
     {'name': '计算机体系', 'slug': 'computer-system', 'summary': '软硬件课程贯通教学系统', 'order': 6},
+    {'name': '教学套件', 'slug': 'teaching-kit', 'summary': 'MOOC 与课程配套实验套件', 'order': 7},
+    {'name': '无线通信', 'slug': 'wireless', 'summary': '蓝牙、WIFI 等无线通信评估板', 'order': 8},
 ]
 
 PRODUCTS = [
@@ -179,6 +181,162 @@ PRODUCTS = [
         ),
         'specifications': '定位 | 计算机软硬件贯通\n课程覆盖 | 数字逻辑 / 计算机组成 / 体系结构\n形态 | 统一实验平台',
         'featured': False, 'order': 7,
+    },
+    {
+        'name': 'MOOC-《电子工程综合实践》配套实验开发套件',
+        'code': 'MOOC-EE Practice Kit',
+        'slug': 'mooc-ee-practice-kit', 'category_slug': 'teaching-kit',
+        'tagline': 'MOOC 课程配套,硬件与软件综合实践入门。',
+        'summary': '配套《电子工程综合实践》MOOC 课程的实验开发套件，'
+                   '带领学习者设计兼有硬件与软件的电子电路系统，并亲手制作工程原型。',
+        'description': (
+            '<p>本课程是针对电子工程相关专业的实践课程，将带领大家设计有一定实用功能、'
+            '兼有硬件和软件的电子电路系统，并亲手制作其工程原型实物，'
+            '为学习者提供电子工程方面的入门级基础性综合技能实践训练。</p>'
+            '<p>课程具体信息请参见 '
+            '<a href="http://www.cnmooc.org/portal/course/73/144.mooc" '
+            'target="_blank" rel="noopener">中国大学 MOOC</a>。</p>'
+            '<p>套件内容：</p>'
+            '<ul>'
+            '<li>电子工程综合实践（MOOC板） × 1 块</li>'
+            '<li>MSP-EXP430G2 LaunchPad × 1 块</li>'
+            '<li>电子工程综合实践基础包材料 × 1 份</li>'
+            '<li>电子工程综合实践拓展包材料 × 1 份</li>'
+            '</ul>'
+            '<p>备注：配件包材料不包含 TI 物料，所需 TI 物料可通过注册 myTI 账号申请获得。</p>'
+        ),
+        'specifications': '配套课程 | 电子工程综合实践\n套件内容 | MOOC板 + MSP-EXP430G2 LaunchPad + 基础包 + 拓展包\nTI 物料 | 需 myTI 账号申请',
+        'featured': False, 'order': 8,
+    },
+    {
+        'name': '口袋电子系统实验模块 AY-SEB Module',
+        'code': 'AY-SEB Module',
+        'slug': 'ay-seb-module', 'category_slug': 'core-board',
+        'tagline': '可独立工作的核心模块，搭配 LaunchPad 扩展实验。',
+        'summary': '口袋电子系统实验核心模块，与 TI MSP430F5529 LaunchPad 或 Tiva Cortex M4 LaunchPad '
+                   '搭配，可实现 COG 显示、机械/触摸按键、BUCK、BOOST、DAC 输出等功能。',
+        'description': (
+            '<p>口袋电子系统实验核心模块（AY-SEB Module）是口袋电子系统实验套件'
+            '（AY-SEB Kit）的核心模块，与套件的外围模块配合，'
+            '可以组建功能更完整、覆盖更多知识点的实验套件。</p>'
+            '<p>核心模块可独立于外围模块工作，它与 TI MSP430F5529 LaunchPad '
+            '或 TI Tiva Cortex M4 LaunchPad 搭配，可以实现 COG 显示、'
+            '机械/触摸按键、BUCK、BOOST、DAC 输出等功能。</p>'
+        ),
+        'specifications': '兼容 LaunchPad | MSP430F5529LP / Tiva Cortex M4\n功能 | COG 显示 / 机械·触摸按键 / BUCK / BOOST / DAC 输出\n形态 | 可独立工作的核心模块',
+        'featured': False, 'order': 9,
+    },
+    {
+        'name': '口袋电子系统实验套件 AY-SEB KIT',
+        'code': 'AY-SEB KIT',
+        'slug': 'ay-seb-kit', 'category_slug': 'mcu',
+        'tagline': '信号链、电源到电机控制，单片机人机交互综合实验平台。',
+        'summary': '创新实验平台涵盖从信号链、电源到电机控制的诸多方面，'
+                   '同时发挥单片机在人机交互方面的优势，生动有趣地学习模拟技术与单片机知识。',
+        'description': (
+            '<p>创新实验平台涵盖从信号链、电源到电机控制的诸多方面，'
+            '同时发挥单片机在人机交互方面的优势，'
+            '生动有趣地学习模拟技术和单片机知识。</p>'
+            '<h3>信号链方面</h3>'
+            '<p>针对超声波、麦克风、压力应变三种传感器的微弱信号，'
+            '分别采用通用运放电路、三极管放大电路和仪表放大器电路进行处理，'
+            '全面学习模拟信号调理的知识。对于常见的数字类传感器信号、'
+            '红外类传感器信号的处理也专门设计了实验。</p>'
+            '<h3>电源管理方面</h3>'
+            '<p>设计了最常用的两种斩波电路：BUCK 斩波电路和 BOOST 斩波电路。'
+            '两个斩波电路分别使用集成芯片和分立 MOSFET 元件来构造，'
+            '在功能上分别为电流输出与电压输出，尽可能罗列电源管理方面的知识点。</p>'
+        ),
+        'specifications': '信号链 | 超声波 / 麦克风 / 压力应变 传感器调理\n电源 | BUCK + BOOST 斩波电路\n主控 | MSP430F5529 LaunchPad',
+        'featured': False, 'order': 10,
+    },
+    {
+        'name': 'MSP430 口袋实验套件 AY-G2PL KIT',
+        'code': 'AY-G2PL KIT',
+        'slug': 'ay-g2pl-kit', 'category_slug': 'mcu',
+        'tagline': '围绕 MSP430G2 的多功能口袋实验板。',
+        'summary': '围绕 MSP430G2 系列的口袋实验套件，涵盖供电单元、触摸板、I2C 扩展 IO、'
+                   '机械按键与 LED 灯柱、LCD 显示、PWM 与滤波器等实验单元。',
+        'description': (
+            '<p>围绕 MSP430G2 系列的口袋实验套件，涵盖多个功能单元：</p>'
+            '<ul>'
+            '<li><strong>供电单元</strong>：涉及运放电源供电的理解，'
+            '双极性信号的处理，电荷泵型反压芯片的应用。</li>'
+            '<li><strong>触摸板单元</strong>：涉及电容触摸按键的测量及原理，'
+            'G2 系列单片机 IO 内部集成 RC 振荡电路的振荡频率的测量，'
+            '施密特反相器构成的多谐振荡器的原理与应用。</li>'
+            '<li><strong>I2C 扩展 IO 单元</strong>：涉及 I2C 原理的学习及应用，'
+            '串行转并行的原理及应用，IO 扩展芯片的原理及应用。</li>'
+            '<li><strong>机械按键及 LED 灯柱</strong>：涉及扩展 IO 口的应用，'
+            '按键及 LED 的控制实验。</li>'
+            '<li><strong>LCD 显示单元</strong>：涉及 128 段液晶显示的原理及应用，'
+            '液晶驱动控制器的原理及应用。可配合其他单元实现显示、控制、存储等功能。</li>'
+            '<li><strong>PWM 及滤波器单元</strong>：涉及 SPWM 的原理及应用，'
+            '滤波器的设计与调试。</li>'
+            '</ul>'
+        ),
+        'specifications': '主控 | MSP430G2 系列\n实验单元 | 供电 / 触摸 / I2C 扩展 / LCD 显示 / PWM 滤波\n形态 | 口袋实验板',
+        'featured': False, 'order': 11,
+    },
+    {
+        'name': '双模蓝牙 4.0 评估板 AY-CC2564EVM',
+        'code': 'AY-CC2564EVM',
+        'slug': 'ay-cc2564-evm', 'category_slug': 'wireless',
+        'tagline': 'TI CC256x 双模蓝牙 4.0 评估板,板载 PCB 天线。',
+        'summary': '基于 TI CC256x 的双模式蓝牙 4.0 评估板，板载 PCB 天线无障碍通信距离不小于 10 米，'
+                   '提供标准 BoosterPack 接口与非标扩展接口。',
+        'description': (
+            '<p>AY-CC2564EVM 是基于 TI CC256x 的双模式蓝牙 4.0 的评估板。'
+            'TI 的电源技术和软件算法使得 CC256X 在蓝牙 BR/EDR/LE 多种模式'
+            '都比同类产品更节能。</p>'
+            '<p>评估板采用板载 PCB 天线，无障碍通信距离不小于 10 米；'
+            '评估板提供标准的 BoosterPack 接口，可以与 TI 的 MSP430 LaunchPad '
+            '或 TIVA LaunchPad 直接互联；评估板同时提供非 BoosterPack 标准的连接接口，'
+            '方便用户将评估板连接到自制的 MCU 系统上。</p>'
+            '<p>板上有关蓝牙芯片的应用设计可以直接拷贝到用户自己的电路板上，'
+            '以减少产品的开发时间。可应用于无线音频传输、无线数据采集等场景。</p>'
+        ),
+        'specifications': '蓝牙芯片 | TI CC256x\n支持模式 | BR / EDR / LE 双模\n通信距离 | ≥10 米（无障碍）\n接口 | BoosterPack 标准接口 + 非标扩展接口\n天线 | 板载 PCB 天线',
+        'featured': False, 'order': 12,
+    },
+    {
+        'name': 'AY-TPA3112 EVM 音频功放评估板',
+        'code': 'AY-TPA3112 EVM',
+        'slug': 'ay-tpa3112-evm', 'category_slug': 'analog-power',
+        'tagline': 'TPA3112D1 评估模块,用户 DIY 装配外围电路。',
+        'summary': 'TPA3112D1 评估模块，外围电路器件由用户 DIY 装配，'
+                   '可构成 25W D 类功放的单声道音频放大器，支持带/不带 LC 滤波器两种输出方式。',
+        'description': (
+            '<p>AY-TPA3112D1 EVM 是一块只焊装了核心芯片 TPA3112D1 的评估模块（EVM），'
+            '外围电路器件由用户 DIY 装配。EVM 的外围电路装配完成后可构成 25W、'
+            'D 类功放的单声道音频放大器。</p>'
+            '<p>EVM 输入模拟音频信号并将板上的输出端口外接 speaker，'
+            '就可以呈现 EVM 的音频功放的效果。EVM 的输出可通过板上的跳线选择'
+            '带 LC 滤波器或不带 LC 滤波器的两种方式，用户可以体验其不同效果。</p>'
+            '<p>用户应用 EVM 能迅速评测 TPA3112D1 的音频放大品质并与数据手册中的'
+            '技术指标进行比对。EVM 提供了完整的《用户指南》，'
+            '包含 EVM 的电路原理图、器件列表（BOM）以及详尽的快速入门指导。</p>'
+        ),
+        'specifications': '核心芯片 | TPA3112D1\n输出功率 | 25W D 类功放\n输出方式 | 带 LC 滤波器 / 直通 可选\n配套资料 | 用户指南（原理图 + BOM + 快速入门）',
+        'featured': False, 'order': 13,
+    },
+    {
+        'name': 'AY-LDC1000 电感数字转换器评估板',
+        'code': 'AY-LDC1000',
+        'slug': 'ay-ldc1000', 'category_slug': 'analog-power',
+        'tagline': '板载 PCB 线圈可分离,支持外接电感传感器。',
+        'summary': 'LDC1000 电感数字转换器评估模块，板载 PCB 传感器线圈与 LDC1000 IC 转换电路可分离，'
+                   '支持外接电感传感器，提供原型系统设计的最大灵活性。',
+        'description': (
+            '<p>该模块为用户提供原型系统设计的最大灵活性。'
+            '体现在板载的 PCB 传感器线圈和 LDC1000 IC 转换电路可以分离。</p>'
+            '<p>当要使用板载的 PCB 传感器线圈时，只需将模块与 MCU 系统的 SPI 数据线'
+            '和相应的供电线连接即可。若要使用外接的电感传感器，'
+            '可以沿板上邮票孔掰断电路板。外接的传感器通过模块配套的接线柱'
+            '连接到转换电路上。</p>'
+        ),
+        'specifications': '核心芯片 | LDC1000\n传感器 | 板载 PCB 线圈（可分离）\n通信接口 | SPI\n扩展 | 支持外接电感传感器',
+        'featured': False, 'order': 14,
     },
 ]
 

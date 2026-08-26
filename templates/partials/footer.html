@@ -21,6 +21,13 @@
                 {% endfor %}
             </div>
             <div class="footer__col">
+                <h4 class="footer__head">资源与商城</h4>
+                <a href="{% url 'resource_list' %}" class="footer__link">资源中心</a>
+                <a href="{% url 'resource_list' %}?cat=doc" class="footer__link">文档下载</a>
+                <a href="{% url 'resource_list' %}?cat=source" class="footer__link">代码例程</a>
+                <a href="http://hzidesign.taobao.com/" target="_blank" rel="noopener" class="footer__link">网上商城 →</a>
+            </div>
+            <div class="footer__col">
                 <h4 class="footer__head">公司</h4>
                 <a href="{% url 'about' %}" class="footer__link">关于我们</a>
                 <a href="{% url 'news_list' %}" class="footer__link">新闻资讯</a>

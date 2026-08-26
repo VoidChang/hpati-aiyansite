@@ -255,6 +255,22 @@ button { font: inherit; cursor: pointer; border: 0; background: none; color: inh
 /* ------------------------------------------------------------ Empty */
 .empty { grid-column: 1 / -1; text-align: center; color: var(--ink-soft); padding: 4rem 0; }
 
+/* ------------------------------------------------------------ Section lead */
+.section__lead { color: var(--ink-soft); font-size: 1.02rem; line-height: 1.7; max-width: 640px; margin: 0.6rem auto 0; text-align: center; }
+
+/* ------------------------------------------------------------ Resource chips */
+.chip--active { color: var(--paper); background: var(--ink); border-color: var(--ink); }
+
+/* ------------------------------------------------------------ Resource card */
+.card--resource { text-decoration: none; color: inherit; }
+.card__media--icon { aspect-ratio: 16 / 9; background: linear-gradient(135deg, var(--mist), var(--mist-2)); display: flex; align-items: center; justify-content: center; }
+.card__icon { width: 44px; height: 44px; color: var(--ink); transition: transform 0.3s ease, color 0.3s ease; }
+.card--resource:hover .card__icon { transform: scale(1.12); color: var(--accent, #2b6cb0); }
+.card__ext { font-family: var(--serif); font-size: 1.4rem; font-weight: 600; color: var(--ink); text-transform: uppercase; letter-spacing: 0.06em; padding: 0.4rem 1rem; border: 1.5px solid var(--ink); border-radius: 8px; background: var(--paper); }
+.card__meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+.meta-pill { font-size: 0.76rem; color: var(--ink-soft); background: var(--mist); padding: 0.18rem 0.6rem; border-radius: 980px; }
+.meta-pill--warn { color: #8a5a00; background: #fff4d6; }
+
 /* ------------------------------------------------------------ Pager */
 .pager { max-width: var(--maxw); margin: 0 auto; padding: 2.5rem var(--gutter); display: flex; justify-content: center; align-items: center; gap: 1.5rem; }
 .pager__btn { font-size: 0.92rem; font-weight: 600; color: var(--ink-soft); padding: 0.5rem 1.2rem; border: 1px solid var(--line); border-radius: 980px; opacity: 0.45; transition: all 0.25s; }

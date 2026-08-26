@@ -15,6 +15,12 @@ python manage.py migrate --noinput
 echo "==> Seeding content (idempotent)"
 python manage.py seed || true
 
+echo "==> Fetching product images from hpati.com"
+python manage.py seed_media || true
+
+echo "==> Seeding resource centre metadata"
+python manage.py seed_resource || true
+
 echo "==> Creating default admin if needed"
 python manage.py init_admin || true
 

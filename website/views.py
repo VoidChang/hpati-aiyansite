@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
 from .models import (
-    News, NewsCategory, Product, ProductCategory, SiteSetting,
+    News, NewsCategory, Product, ProductCategory, Resource, SiteSetting,
 )
 
 
@@ -109,6 +109,30 @@ def about(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
+
+# --------------------------------------------------------------------------- #
+# Resource centre
+# --------------------------------------------------------------------------- #
+class ResourceListView(ListView):
+    template_name = 'resource_list.html'
+    paginate_by = 20
+    context_object_name = 'resources'
+
+    def get_queryset(self):
+        qs = Resource.objects.filter(is_published=True).order_by(
+            'category', 'order', '-created_at',
+        )
+        cat = self.request.GET.get('cat')
+        if cat and cat in dict(Resource.CATEGORY_CHOICES):
+            qs = qs.filter(category=cat)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['categories'] = Resource.CATEGORY_CHOICES
+        ctx['active_cat'] = self.request.GET.get('cat', '')
+        return ctx
 
 
 def custom_404(request, exception=None):
