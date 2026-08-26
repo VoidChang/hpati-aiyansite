@@ -58,3 +58,12 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Secrets / keys — NEVER commit
+*.pem
+*.key
+*.ppk
+id_rsa
+id_ed25519
+*.p12
+*.pfx
