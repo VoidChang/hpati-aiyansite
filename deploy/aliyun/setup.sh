@@ -122,9 +122,11 @@ fi
 
 echo "==> Creating venv and installing deps"
 python3 -m venv "$INSTALL_DIR/venv"
+# shellcheck disable=SC1091
 source "$INSTALL_DIR/venv/bin/activate"
+cd "$INSTALL_DIR"   # so `python manage.py ...` resolves
 pip install --upgrade pip
-pip install -r "$INSTALL_DIR/requirements.txt"
+pip install -r requirements.txt
 pip install gunicorn psycopg2-binary
 
 # ---------------------------------------------------------------- #
