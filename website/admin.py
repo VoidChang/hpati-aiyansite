@@ -11,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 
 from .models import (
     News, NewsCategory, Product, ProductCategory, ProductDocument,
-    ProductExperiment, ProductImage, SiteSetting,
+    ProductExperiment, ProductImage, Resource, SiteSetting,
 )
 
 
@@ -155,3 +155,32 @@ class NewsAdmin(admin.ModelAdmin):
             )
         return '—'
     cover_preview.short_description = '封面预览'
+
+
+# --------------------------------------------------------------------------- #
+# Resources
+# --------------------------------------------------------------------------- #
+@admin.register(Resource)
+class ResourceAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category', 'product', 'file_size_hint',
+                    'is_published', 'order', 'updated_at')
+    list_editable = ('is_published', 'order')
+    list_filter = ('category', 'is_published', 'product')
+    search_fields = ('title', 'description', 'external_url')
+    readonly_fields = ('created_at', 'updated_at', 'external_link')
+    fieldsets = (
+        (_('基本信息'), {'fields': ('title', 'category', 'product')}),
+        (_('内容'), {'fields': ('description', 'download_password',
+                                'file_size_hint', 'external_url', 'external_link')}),
+        (_('发布'), {'fields': ('is_published', 'order', 'published_at',
+                                'created_at', 'updated_at')}),
+    )
+
+    @admin.display(description='打开原站')
+    def external_link(self, obj):
+        if obj and obj.external_url:
+            return format_html(
+                '<a href="{}" target="_blank" rel="noopener">{}</a>',
+                obj.external_url, obj.external_url,
+            )
+        return '—'
