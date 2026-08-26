@@ -63,7 +63,13 @@ echo
 # 1. System packages
 # ---------------------------------------------------------------- #
 echo "==> Installing system packages"
-dnf install -y epel-release
+# EPEL is optional — only needed for a handful of niche packages.
+# On Alibaba Cloud Linux 4 the default repos already carry nginx,
+# postgresql, python3, firewalld, etc. Try EPEL but don't fail the
+# whole install if the release package isn't shipped on this distro.
+if ! dnf install -y epel-release; then
+    echo "[warn] epel-release not available on this distro; continuing without EPEL"
+fi
 dnf groupinstall -y "Development Tools"
 dnf install -y \
     python3 python3-devel python3-pip \
