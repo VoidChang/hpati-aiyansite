@@ -19,6 +19,7 @@ env = environ.Env(
     ALLOWED_HOSTS=(str, ''),
     SECRET_KEY=(str, ''),
     DATABASE_URL=(str, ''),
+    SECURE_SSL_REDIRECT=(bool, True),
 )
 env_file = BASE_DIR / '.env'
 if env_file.exists():
@@ -127,9 +128,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Security hardening (active when DEBUG=False).
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
+    # Allow disabling SSL redirect when serving on a bare IP (no TLS cert yet).
+    SECURE_SSL_REDIRECT = env('SECURE_SSL_REDIRECT', default=True)
+    SESSION_COOKIE_SECURE = env('SECURE_SSL_REDIRECT', default=True)
+    CSRF_COOKIE_SECURE = env('SECURE_SSL_REDIRECT', default=True)
     SECURE_HSTS_SECONDS = 60 * 60 * 24 * 365
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
