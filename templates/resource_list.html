@@ -11,7 +11,7 @@
     <div class="section__head">
         <p class="section__eyebrow">Resources</p>
         <h1 class="section__title">资源中心</h1>
-        <p class="section__lead">配套文档、例程代码、工具软件与培训资料。资源文件托管于原 hpati.com，点击下方条目跳转下载。</p>
+        <p class="section__lead">配套文档、例程代码、工具软件与培训资料，全部资源已下载至本地服务器。</p>
     </div>
 
     {# ── 分类筛选 ──────────────────────────────────────────── #}
@@ -24,20 +24,24 @@
         </div>
     </div>
 
-    {# ── 资源列表 ──────────────────────────────────────────── #}
+    {# ── 资源列表(纵向)──────────────────────────────────── #}
     {% if resources %}
-    <div class="grid grid--cards">
+    <div class="resource-list">
         {% for r in resources %}
-            <a href="{{ r.external_url }}" target="_blank" rel="noopener" class="card card--resource" data-reveal style="--i:{{ forloop.counter }}">
-                <div class="card__media card__media--icon" aria-hidden="true">
+            {% if r.file or r.external_url %}
+            <a href="{% if r.file %}{{ r.file.url }}{% else %}{{ r.external_url }}{% endif %}"
+               {% if r.file %}download{% else %}target="_blank" rel="noopener"{% endif %}
+               class="resource-row" data-reveal style="--i:{{ forloop.counter }}">
+            {% else %}
+            <div class="resource-row resource-row--disabled" data-reveal style="--i:{{ forloop.counter }}">
+            {% endif %}
+                <div class="resource-row__icon" aria-hidden="true">
                     {% if r.category == 'video' %}
-                        {# 视频:播放按钮 #}
                         <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="2" y="4" width="20" height="16" rx="2"/>
                             <polygon points="10 9 16 12 10 15 10 9" fill="currentColor" stroke="currentColor"/>
                         </svg>
                     {% elif r.category == 'doc' %}
-                        {# 文档:带折角的文档 #}
                         <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                             <polyline points="14 2 14 8 20 8"/>
@@ -45,14 +49,12 @@
                             <line x1="8" y1="17" x2="14" y2="17"/>
                         </svg>
                     {% elif r.category == 'source' %}
-                        {# 代码:</> #}
                         <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="8 6 2 12 8 18"/>
                             <polyline points="16 6 22 12 16 18"/>
                             <line x1="14" y1="4" x2="10" y2="20"/>
                         </svg>
                     {% elif r.category == 'tool' %}
-                        {# 工具:齿轮 #}
                         <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="3"/>
                             <path d="M12 2v3M12 19v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2 12h3M19 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/>
@@ -64,18 +66,24 @@
                         </svg>
                     {% endif %}
                 </div>
-                <div class="card__body">
-                    <span class="card__code">{{ r.get_category_display }}</span>
-                    <h3 class="card__title">{{ r.title }}</h3>
-                    {% if r.product %}<p class="card__text">关联产品 · {{ r.product.name }}</p>{% endif %}
-                    <div class="card__meta">
+
+                <div class="resource-row__body">
+                    <div class="resource-row__head">
+                        <span class="resource-row__cat">{{ r.get_category_display }}</span>
+                        <h3 class="resource-row__title">{{ r.title }}</h3>
+                    </div>
+                    <div class="resource-row__meta">
+                        {% if r.product %}<span class="meta-pill meta-pill--soft">关联 · {{ r.product.name }}</span>{% endif %}
                         {% if r.file_size_hint %}<span class="meta-pill">{{ r.file_size_hint }}</span>{% endif %}
                         {% if r.download_password %}<span class="meta-pill meta-pill--warn">密码 {{ r.download_password }}</span>{% endif %}
-                        {% if r.published_at %}<time class="meta-pill">{{ r.published_at|date:"Y-m-d" }}</time>{% endif %}
+                        {% if r.published_at %}<time class="meta-pill meta-pill--soft">{{ r.published_at|date:"Y-m-d" }}</time>{% endif %}
                     </div>
-                    <span class="card__more">前往下载 →</span>
                 </div>
-            </a>
+
+                <div class="resource-row__action">
+                    <span class="resource-row__cta">{% if r.file %}下载{% elif r.external_url %}前往下载{% else %}暂不可下载{% endif %}{% if r.file or r.external_url %} →{% endif %}</span>
+                </div>
+            {% if r.file or r.external_url %}</a>{% else %}</div>{% endif %}
         {% endfor %}
     </div>
 

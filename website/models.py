@@ -50,6 +50,10 @@ def news_cover_upload_to(instance, filename):
     return _path_for(instance, filename, 'news/covers')
 
 
+def resource_file_upload_to(instance, filename):
+    return _path_for(instance, filename, 'resources')
+
+
 # --------------------------------------------------------------------------- #
 # Product catalogue
 # --------------------------------------------------------------------------- #
@@ -288,8 +292,16 @@ class SiteSetting(models.Model):
 
     contact_address = models.CharField('地址', max_length=200, blank=True)
     contact_phone = models.CharField('电话', max_length=60, blank=True)
+    contact_fax = models.CharField('传真', max_length=60, blank=True)
     contact_email = models.EmailField('邮箱', blank=True)
     contact_wechat = models.CharField('微信公众号', max_length=100, blank=True)
+    contact_zip = models.CharField('邮编', max_length=20, blank=True)
+    work_hours = models.CharField('工作时间', max_length=100, blank=True,
+                                   help_text='例如「9:00-17:00」。')
+    map_lng = models.FloatField('地图经度', null=True, blank=True,
+                                help_text='百度地图经度,如 120.181077。')
+    map_lat = models.FloatField('地图纬度', null=True, blank=True,
+                                help_text='百度地图纬度,如 30.18991。')
     contact_icp = models.CharField('备案号', max_length=100, blank=True)
 
     updated_at = models.DateTimeField('更新时间', auto_now=True)
@@ -306,6 +318,18 @@ class SiteSetting(models.Model):
         """Return the single canonical row, creating it lazily if needed."""
         obj, _ = cls.objects.get_or_create(pk=1)
         return obj
+
+    @property
+    def map_bbox(self) -> str:
+        """Bounding box for OpenStreetMap embed iframe (left,bottom,right,top).
+
+        Returns an empty string if no coordinates are configured.
+        """
+        if not (self.map_lng and self.map_lat):
+            return ''
+        dl, dt = 0.008, 0.005
+        return (f'{self.map_lng - dl:.4f},{self.map_lat - dt:.4f},'
+                f'{self.map_lng + dl:.4f},{self.map_lat + dt:.4f}')
 
 
 # --------------------------------------------------------------------------- #
@@ -336,8 +360,12 @@ class Resource(models.Model):
                                          help_text='原站下载密码提示，如 xxad。')
     file_size_hint = models.CharField('文件大小', max_length=40, blank=True,
                                        help_text='可选，例如「2 MB」。')
+    file = models.FileField(
+        '本地文件', upload_to=resource_file_upload_to, blank=True,
+        help_text='下载到本地的资源文件；留空则使用原站链接。',
+    )
     external_url = models.URLField('原站链接', max_length=300,
-                                   help_text='原 hpati.com 下载页 URL。')
+                                   help_text='原 hpati.com 下载页 URL，本地无文件时回退使用。')
     product = models.ForeignKey(
         Product, on_delete=models.SET_NULL, null=True, blank=True,
         related_name='resources', verbose_name='关联产品',
