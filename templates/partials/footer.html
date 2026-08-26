@@ -14,7 +14,7 @@
 
         <div class="footer__cols">
             <div class="footer__col">
-                <h4 class="footer__head">产品</h4>
+                <h4 class="footer__head">产品&资料</h4>
                 <a href="{% url 'product_list' %}" class="footer__link">全部产品</a>
                 {% for cat in site_categories|default_if_none:'' %}
                     <a href="{% url 'product_list' %}?cat={{ cat.slug }}" class="footer__link">{{ cat.name }}</a>
@@ -24,7 +24,7 @@
                 <h4 class="footer__head">资源与商城</h4>
                 <a href="{% url 'resource_list' %}" class="footer__link">资源中心</a>
                 <a href="{% url 'resource_list' %}?cat=doc" class="footer__link">文档下载</a>
-                <a href="{% url 'resource_list' %}?cat=source" class="footer__link">代码例程</a>
+                <a href="{% url 'resource_list' %}?cat=video" class="footer__link">视频资源</a>
                 <a href="http://hzidesign.taobao.com/" target="_blank" rel="noopener" class="footer__link">网上商城 →</a>
             </div>
             <div class="footer__col">
@@ -35,9 +35,10 @@
             </div>
             <div class="footer__col">
                 <h4 class="footer__head">联系</h4>
-                {% if site.contact_phone %}<span class="footer__meta">{{ site.contact_phone }}</span>{% endif %}
+                {% if site.contact_phone %}<span class="footer__meta">电话 · {{ site.contact_phone }}</span>{% endif %}
                 {% if site.contact_email %}<a href="mailto:{{ site.contact_email }}" class="footer__link">{{ site.contact_email }}</a>{% endif %}
                 {% if site.contact_address %}<span class="footer__meta">{{ site.contact_address }}</span>{% endif %}
+                {% if site.contact_zip %}<span class="footer__meta">邮编 · {{ site.contact_zip }}</span>{% endif %}
                 {% if site.contact_wechat %}<span class="footer__meta">微信 · {{ site.contact_wechat }}</span>{% endif %}
             </div>
         </div>

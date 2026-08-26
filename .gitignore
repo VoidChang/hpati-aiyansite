@@ -67,3 +67,10 @@ id_rsa
 id_ed25519
 *.p12
 *.pfx
+
+# Local SSH helper (contains plaintext credentials)
+deploy/aliyun/ssh_exec.py
+deploy/aliyun/check_css_url.py
+
+# Stray static HTML exports at repo root
+/about.html

@@ -16,11 +16,11 @@
 
         <nav class="nav__links" aria-label="主导航">
             <a href="{% url 'home' %}" class="nav__link">首页</a>
-            <a href="{% url 'product_list' %}" class="nav__link">产品</a>
-            <a href="{% url 'resource_list' %}" class="nav__link">资源</a>
-            <a href="{% url 'news_list' %}" class="nav__link">新闻</a>
-            <a href="{% url 'about' %}" class="nav__link">关于</a>
-            <a href="{% url 'contact' %}" class="nav__link">联系</a>
+            <a href="{% url 'product_list' %}" class="nav__link">产品&资料</a>
+            <a href="{% url 'resource_list' %}" class="nav__link">资源中心</a>
+            <a href="{% url 'news_list' %}" class="nav__link">新闻资讯</a>
+            <a href="{% url 'about' %}" class="nav__link">关于我们</a>
+            <a href="{% url 'about' %}#contact" class="nav__link">联系我们</a>
         </nav>
 
         <button class="nav__toggle" data-nav-toggle aria-label="菜单" aria-expanded="false">
@@ -29,10 +29,10 @@
     </div>
     <div class="nav__drawer" data-nav-drawer>
         <a href="{% url 'home' %}" class="nav__drawer-link">首页</a>
-        <a href="{% url 'product_list' %}" class="nav__drawer-link">产品</a>
-        <a href="{% url 'resource_list' %}" class="nav__drawer-link">资源</a>
-        <a href="{% url 'news_list' %}" class="nav__drawer-link">新闻</a>
-        <a href="{% url 'about' %}" class="nav__drawer-link">关于</a>
-        <a href="{% url 'contact' %}" class="nav__drawer-link">联系</a>
+        <a href="{% url 'product_list' %}" class="nav__drawer-link">产品&资料</a>
+        <a href="{% url 'resource_list' %}" class="nav__drawer-link">资源中心</a>
+        <a href="{% url 'news_list' %}" class="nav__drawer-link">新闻资讯</a>
+        <a href="{% url 'about' %}" class="nav__drawer-link">关于我们</a>
+        <a href="{% url 'about' %}#contact" class="nav__drawer-link">联系我们</a>
     </div>
 </header>

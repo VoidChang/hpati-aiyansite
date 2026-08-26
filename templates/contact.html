@@ -16,27 +16,45 @@
     <div class="contact-grid">
         <div class="contact-block" data-reveal style="--i:1">
             <p class="contact-block__label">公司</p>
-            <p class="contact-block__value">{{ site.company_name }}{% if site.company_name_en %} · {{ site.company_name_en }}{% endif %}</p>
+            <p class="contact-block__value">{{ site.company_name }}</p>
+            {% if site.company_name_en %}
+            <p class="contact-block__value contact-block__value--soft">{{ site.company_name_en }}</p>
+            {% endif %}
             <p class="contact-block__value contact-block__value--soft">{{ site.tagline }}</p>
         </div>
 
         {% if site.contact_address %}
         <div class="contact-block" data-reveal style="--i:2">
-            <p class="contact-block__label">地址</p>
+            <p class="contact-block__label">通讯地址</p>
             <p class="contact-block__value">{{ site.contact_address }}</p>
+            {% if site.contact_zip %}
+            <p class="contact-block__value contact-block__value--soft">邮编 {{ site.contact_zip }}</p>
+            {% endif %}
         </div>
         {% endif %}
 
         {% if site.contact_phone %}
         <div class="contact-block" data-reveal style="--i:3">
-            <p class="contact-block__label">电话</p>
-            <p class="contact-block__value">{{ site.contact_phone }}</p>
+            <p class="contact-block__label">联系电话</p>
+            <p class="contact-block__value">
+                <a href="tel:{{ site.contact_phone }}">{{ site.contact_phone }}</a>
+            </p>
+            {% if site.work_hours %}
+            <p class="contact-block__value contact-block__value--soft">工作时间 {{ site.work_hours }}</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if site.contact_fax %}
+        <div class="contact-block" data-reveal style="--i:4">
+            <p class="contact-block__label">传真</p>
+            <p class="contact-block__value">{{ site.contact_fax }}</p>
         </div>
         {% endif %}
 
         {% if site.contact_email %}
-        <div class="contact-block" data-reveal style="--i:4">
-            <p class="contact-block__label">邮箱</p>
+        <div class="contact-block" data-reveal style="--i:5">
+            <p class="contact-block__label">电子邮箱</p>
             <p class="contact-block__value">
                 <a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a>
             </p>
@@ -44,11 +62,31 @@
         {% endif %}
 
         {% if site.contact_wechat %}
-        <div class="contact-block" data-reveal style="--i:5">
-            <p class="contact-block__label">微信</p>
+        <div class="contact-block" data-reveal style="--i:6">
+            <p class="contact-block__label">微信公众号</p>
             <p class="contact-block__value">{{ site.contact_wechat }}</p>
         </div>
         {% endif %}
     </div>
 </section>
+
+{% if site.map_lng and site.map_lat %}
+<section class="section section--tight">
+    <div class="prose prose--wide" data-reveal>
+        <h2>公司位置</h2>
+        <p>{{ site.contact_address }}</p>
+        <div class="contact-map">
+            <iframe
+                src="https://www.openstreetmap.org/export/embed.html?bbox={{ site.map_bbox|urlencode }}&layer=mapnik&marker={{ site.map_lat|floatformat:4 }}%2C{{ site.map_lng|floatformat:4 }}"
+                width="960" height="420" style="border:0;width:100%;max-width:960px;border-radius:12px;"
+                title="{{ site.company_name }} 地图位置" loading="lazy">
+            </iframe>
+        </div>
+        <p class="contact-map__hint">
+            <a href="https://www.openstreetmap.org/?mlat={{ site.map_lat|floatformat:4 }}&mlon={{ site.map_lng|floatformat:4 }}#map=16/{{ site.map_lat|floatformat:4 }}/{{ site.map_lng|floatformat:4 }}"
+               target="_blank" rel="noopener">在 OpenStreetMap 中查看大图 →</a>
+        </p>
+    </div>
+</section>
+{% endif %}
 {% endblock %}

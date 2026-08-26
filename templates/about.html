@@ -1,45 +1,257 @@
 {% extends 'base.html' %}
 
 {% block title %}关于我们 · {{ site.company_name|default:"艾研信息" }}{% endblock %}
+{% block meta %}<meta name="description" content="关于杭州艾研信息技术有限公司 — 公司简介、联系方式、合作伙伴、招贤纳才">{% endblock %}
 {% block body_class %}page-about{% endblock %}
 
 {% block content %}
-<header class="page-head page-head--center">
-    <div class="page-head__inner">
-        <p class="page-head__eyebrow" data-reveal>About</p>
-        <h1 class="page-head__title" data-reveal>{{ site.about_title|default:"让工程教育，回归动手实践" }}</h1>
-    </div>
-</header>
-
-<section class="section section--flat">
-    <div class="prose prose--wide" data-reveal>
-        {% if site.about_body %}
-            {{ site.about_body|safe }}
-        {% else %}
-            <p>{{ site.company_name }} 专注于高校电子工程教育的教学实验平台研发。我们以模块化、可扩展为设计原则，覆盖单片机、物联网、模拟电源、信号链与智能小车等方向，配套完整的代码例程与应用视频。</p>
-            <p>从课程教学到学科竞赛，一套套件贯穿始终。</p>
-        {% endif %}
+<!-- Hero -->
+<section class="about-hero">
+    <div class="container container-narrow">
+        <span class="section__eyebrow" style="margin-bottom:1.5rem;">About Us</span>
+        <h1 class="about-hero__title">为高校嵌入式与模拟技术教育<br>提供综合性解决方案</h1>
+        <p class="about-hero__subtitle">杭州艾研信息技术有限公司位于杭州高新技术开发区内，是集研发、生产、销售、服务于一体的科技型技术企业。</p>
     </div>
 </section>
 
-<section class="stats">
-    <div class="stats__inner">
-        <div class="stats__item" data-reveal style="--i:1">
-            <span class="stats__num">6+</span>
-            <span class="stats__label">产品线</span>
-        </div>
-        <div class="stats__item" data-reveal style="--i:2">
-            <span class="stats__num">10+</span>
-            <span class="stats__label">年教学积累</span>
-        </div>
-        <div class="stats__item" data-reveal style="--i:3">
-            <span class="stats__num">TI</span>
-            <span class="stats__label">生态合作伙伴</span>
-        </div>
-        <div class="stats__item" data-reveal style="--i:4">
-            <span class="stats__num">产学</span>
-            <span class="stats__label">协同育人项目</span>
+<!-- Tab 切换 -->
+<section class="section section--flat" style="padding-top:2.5rem;padding-bottom:1rem;">
+    <div class="container">
+        <div class="filter-bar reveal">
+            <button class="filter-chip filter-chip--active" data-about-tab="intro">公司简介</button>
+            <button class="filter-chip" data-about-tab="contact">联系我们</button>
+            <button class="filter-chip" data-about-tab="partners">合作伙伴</button>
+            <button class="filter-chip" data-about-tab="jobs">招贤纳才</button>
         </div>
     </div>
 </section>
+
+<!-- 公司简介 -->
+<section class="section" style="padding-top:1rem;" data-about-panel="intro">
+    <div class="container container-narrow">
+        <div class="reveal">
+            <span class="section__eyebrow">公司简介</span>
+            <h2 class="section__title" style="margin-bottom:2rem;">搭建半导体厂商与高校的桥梁</h2>
+            <p class="about-text">
+                杭州艾研信息技术有限公司（Hangzhou Aiyan Information Technology Co., Ltd.）位于杭州高新技术开发区内，是集研发、生产、销售、服务于一体的科技型技术企业。公司依托园区区位优势，与国内多所院校开展技术合作，致力于为高校、科研院所、企业提供综合性解决方案。主要产品包括高校教育实验平台、面向高校研究所应用开发方案等。
+            </p>
+            <p class="about-text">
+                艾研信息定位于搭建半导体厂商与国内大专院校的合作桥梁，凭借专业的服务、创新的理念、热忱的态度，携手各方推动嵌入式及模拟技术在国内稳步发展。公司研发团队在嵌入式技术以及相关模拟技术领域积累了充足的技术与产品设计开发经验。
+            </p>
+            <p class="about-text">
+                依托和半导体厂商及大专院校的项目合作基础，我们可提供硬件、软件、案例、课程、教材、培训一体化配套方案，合力推进嵌入式及模拟技术走进国内高校，助力学生综合能力稳步提升。
+            </p>
+        </div>
+
+        <div class="features reveal" style="margin-top:3rem;">
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <h3 class="feature-card__title">研发实力</h3>
+                <p class="feature-card__desc">研发团队在嵌入式与模拟技术领域积累充足技术与产品设计开发经验。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3 class="feature-card__title">高校合作</h3>
+                <p class="feature-card__desc">与国内多所院校开展技术合作，支持教育部产学合作协同育人项目。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                </div>
+                <h3 class="feature-card__title">配套方案</h3>
+                <p class="feature-card__desc">硬件、软件、案例、课程、教材、培训一体化配套，开箱即用。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 联系我们 -->
+<section class="section section--tint" data-about-panel="contact" id="contact" style="display:none;padding-top:1rem;">
+    <div class="container">
+        <div class="section__head reveal">
+            <span class="section__eyebrow">联系我们</span>
+            <h2 class="section__title">多种方式，随时沟通</h2>
+            <p class="section__lead">工作时间 9:00 - 17:00，欢迎通过电话、邮件或亲临公司交流。</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-card reveal">
+                <div class="contact-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div class="contact-card__label">热线电话</div>
+                <div class="contact-card__value">0571-86134572</div>
+            </div>
+            <div class="contact-card reveal">
+                <div class="contact-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <div class="contact-card__label">电子邮箱</div>
+                <div class="contact-card__value"><a href="mailto:support@hpati.com">support@hpati.com</a></div>
+            </div>
+            <div class="contact-card reveal">
+                <div class="contact-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div class="contact-card__label">通讯地址</div>
+                <div class="contact-card__value">杭州市滨江区滨安路1197号4幢207室<br>邮编：310013</div>
+            </div>
+            <div class="contact-card reveal">
+                <div class="contact-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div class="contact-card__label">工作时间</div>
+                <div class="contact-card__value">周一至周五<br>9:00 - 17:00</div>
+            </div>
+            <div class="contact-card reveal">
+                <div class="contact-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <div class="contact-card__label">传真</div>
+                <div class="contact-card__value">0571-86134572</div>
+            </div>
+            <div class="contact-card reveal">
+                <div class="contact-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+                </div>
+                <div class="contact-card__label">招聘邮箱</div>
+                <div class="contact-card__value"><a href="mailto:yuxudan@hpati.com">yuxudan@hpati.com</a></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 合作伙伴 -->
+<section class="section" data-about-panel="partners" id="partners" style="display:none;padding-top:1rem;">
+    <div class="container">
+        <div class="section__head reveal">
+            <span class="section__eyebrow">合作伙伴</span>
+            <h2 class="section__title">携手半导体厂商与高校</h2>
+            <p class="section__lead">艾研信息长期与德州仪器（TI）等半导体厂商以及国内多所高校开展技术合作，共同推进嵌入式与模拟技术在国内的发展。</p>
+        </div>
+
+        <div class="features reveal" style="margin-bottom:3rem;">
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83M16.62 12l-5.74 9.94"/></svg>
+                </div>
+                <h3 class="feature-card__title">半导体厂商</h3>
+                <p class="feature-card__desc">与 TI（德州仪器）等半导体厂商合作，基于 MSP430、Cortex-M、MSPM0、C2000、C5000、C6000 等系列芯片开发教学产品。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                </div>
+                <h3 class="feature-card__title">高等院校</h3>
+                <p class="feature-card__desc">支持教育部产学合作协同育人项目，与国内多所高校在新工科建设、教学内容和课程改革、实践基地建设等方向合作。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                </div>
+                <h3 class="feature-card__title">资质认证</h3>
+                <p class="feature-card__desc">被评为杭州市高新技术企业，入选杭州市"雏鹰计划"企业，深耕嵌入式与模拟技术教育领域多年。</p>
+            </div>
+        </div>
+
+        <div class="reveal cta-inner-box">
+            <h3 class="cta-inner-box__title">如果您是高校教师或半导体厂商</h3>
+            <p class="cta-inner-box__desc">欢迎与我们联系，探讨课程共建、实践基地、师资培训、定制开发等多元化合作模式。</p>
+            <a href="#contact" class="btn btn--solid" data-tab-link="contact">联系我们 <span class="arrow">→</span></a>
+        </div>
+    </div>
+</section>
+
+<!-- 招贤纳才 -->
+<section class="section section--tint" data-about-panel="jobs" id="jobs" style="display:none;padding-top:1rem;">
+    <div class="container container-narrow">
+        <div class="section__head reveal">
+            <span class="section__eyebrow">招贤纳才</span>
+            <h2 class="section__title">加入艾研，共创未来</h2>
+            <p class="section__lead">如果你对嵌入式、模拟技术、教育产品开发充满热情，欢迎加入我们。</p>
+        </div>
+
+        <div class="reveal jobs-box">
+            <h3 class="jobs-box__title">投递方式</h3>
+            <p class="jobs-box__text">
+                如果你对以下岗位感兴趣，请将简历发送到统一的邮箱：<a href="mailto:yuxudan@hpati.com" class="jobs-box__mail">yuxudan@hpati.com</a><br>
+                当然，你也可以通过电话直接与我们联系：<strong>0571-86134572</strong>
+            </p>
+            <div class="jobs-box__tip">
+                提示：请在邮件标题中注明"应聘 + 岗位名称 + 姓名"，方便我们快速处理。
+            </div>
+        </div>
+
+        <div class="reveal jobs-box">
+            <h3 class="jobs-box__title">我们期待的你</h3>
+            <ul class="split__list">
+                <li class="split__list-item">电子工程、自动化、计算机、通信等相关专业背景</li>
+                <li class="split__list-item">熟悉嵌入式系统开发，有 MSP430、Cortex-M、DSP 等平台经验者优先</li>
+                <li class="split__list-item">对模拟电路、信号链、电源设计有理解或实践经历</li>
+                <li class="split__list-item">热爱教育行业，希望将技术转化为教学产品与课程</li>
+                <li class="split__list-item">良好的沟通能力与团队协作精神</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+    <div class="cta-banner__inner">
+        <h2 class="cta-banner__title">让我们携手推动嵌入式与模拟技术走进高校</h2>
+        <p class="cta-banner__desc">无论你是高校教师、学生、半导体厂商还是合作伙伴，我们都期待与你交流。</p>
+        <div class="cta-banner__actions">
+            <a href="{% url 'product_list' %}" class="btn btn--solid btn--lg">浏览产品 <span class="arrow">→</span></a>
+            <a href="{% url 'resource_list' %}" class="btn btn--lg cta-banner__btn-ghost">查看资源</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+    var tabs = document.querySelectorAll('[data-about-tab]');
+    var panels = document.querySelectorAll('[data-about-panel]');
+    function activate(name) {
+        tabs.forEach(function (t) {
+            t.classList.toggle('filter-chip--active', t.getAttribute('data-about-tab') === name);
+        });
+        panels.forEach(function (p) {
+            var match = p.getAttribute('data-about-panel') === name;
+            p.style.display = match ? '' : 'none';
+        });
+        if (window.location.hash !== '#' + name) {
+            history.replaceState(null, '', '#' + name);
+        }
+    }
+    tabs.forEach(function (t) {
+        t.addEventListener('click', function () {
+            activate(t.getAttribute('data-about-tab'));
+        });
+    });
+    // 联系按钮 / 锚点跳转
+    document.querySelectorAll('[data-tab-link]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+            e.preventDefault();
+            activate(a.getAttribute('data-tab-link'));
+        });
+    });
+    // 初始化:跟随 URL hash
+    var init = (location.hash || '').replace('#', '');
+    if (['contact', 'partners', 'jobs'].indexOf(init) >= 0) {
+        activate(init);
+    }
+    // 监听 hash 变化:从其他页面或导航点击带 hash 链接时同步切换 Tab
+    window.addEventListener('hashchange', function () {
+        var name = (location.hash || '').replace('#', '');
+        if (['contact', 'partners', 'jobs', 'intro'].indexOf(name) >= 0) {
+            activate(name);
+        }
+    });
+})();
+</script>
 {% endblock %}
