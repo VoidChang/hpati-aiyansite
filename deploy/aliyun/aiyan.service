@@ -1,0 +1,29 @@
+[Unit]
+Description=AiYan Django website (gunicorn)
+Documentation=https://github.com/VoidChang/hpati-aiyansite
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=notify
+User=nginx
+Group=nginx
+WorkingDirectory=/data/web
+EnvironmentFile=/data/web/.env
+Environment=DJANGO_SETTINGS_MODULE=aiyansite.settings
+ExecStart=/data/web/venv/bin/gunicorn aiyansite.wsgi:application \
+    --bind 127.0.0.1:8000 \
+    --workers 3 \
+    --threads 2 \
+    --timeout 120 \
+    --graceful-timeout 30 \
+    --access-logfile /var/log/aiyan/access.log \
+    --error-logfile /var/log/aiyan/error.log
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=30
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
